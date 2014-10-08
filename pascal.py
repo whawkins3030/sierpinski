@@ -8,21 +8,21 @@ import sys
 
 def printPascal(n):
 	row = [1]
-	triangle = [row]
+	printRow(row, n)
 	for x in range(n-1):
 		row = getNewRow(row)
-		triangle += [row]
-	for i in range(len(triangle)):
-		printRow(i, triangle[i], n)
+		printRow(row, n)
 
 def getNewRow(prevRow):
 	return [prevRow[0]] + [(prevRow[i] + prevRow[i+1])%2 for i in range(len(prevRow)-1)] + [prevRow[-1]]
 
-def printRow(i, row, n):
+def printRow(row, n):
 	r = ' '.join(str(elem) for elem in row)
 	line = ' '*(((2*n+1)-len(r))//2) + r + ' '*(((2*n+1)-len(r))//2)
 	print(line)
 
+def main():
+	for i in range(1,len(sys.argv)):
+		printPascal(eval(sys.argv[i]))
 
-for i in range(1,len(sys.argv)):
-	printPascal(eval(sys.argv[i]))
+main()
